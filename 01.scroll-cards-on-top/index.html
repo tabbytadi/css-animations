@@ -1,0 +1,44 @@
+<!-- If the items you're animating are not direct children of the view-timeline triggers you need to add timeline-scope to a shared parent: https://developer.mozilla.org/en-US/docs/Web/CSS/timeline-scope  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Triggers</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <section class="cards" style="timeline-scope: --trigger-1, --trigger-2, --trigger-3;">
+    <div class="card-scroll-triggers">
+      <!-- these items don't have to be visible, but they can't be display none'd. The color is purely for debugging purposes. We're using these divs to start and end the animations -->
+      <div style="view-timeline: --trigger-1; --color: #FFA69E;">
+        Trigger for card 1
+      </div>
+      <div style="view-timeline: --trigger-2; --color: #B8F2E6;">
+        Trigger for card 2
+      </div>
+      <div style="view-timeline: --trigger-3; --color: #5E6472;">
+        Trigger for card 3
+      </div>
+    </div>
+    <div class="cards__inner">
+      <div class="card" style="--animation-timeline: --trigger-1;">
+        1
+      </div>
+      <div class="card" style="--animation-timeline: --trigger-2;">
+        2
+      </div>
+      <div class="card" style="--animation-timeline: --trigger-3;">
+        3
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

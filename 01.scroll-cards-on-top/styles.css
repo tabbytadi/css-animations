@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: sans-serif;
+
+}
+
+.cards {
+  position: relative;
+  width: 100%;
+  height: 300lvh;
+}
+
+.card-scroll-triggers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 100lvh;
+  /* change this to zero if you want the animation to continue as long as this container is in view */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-scroll-triggers div {
+  width: 100%;
+  flex-grow: 1;
+  background: var(--color);
+  writing-mode: vertical-rl;
+  padding: 0.2em;
+  text-align: center;
+}
+
+.cards__inner {
+  position: sticky;
+  top: 0;
+  height: 100lvh;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  position: sticky;
+  /* backup if animation timeline is not supported */
+  top: 0;
+  min-width: 20vw;
+  max-width: 40vw;
+  max-height: 70vh;
+  aspect-ratio: 3/4;
+  border: 2px solid #111;
+  border-radius: 3rem;
+  font-size: 10vw;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  --rotate: -10deg;
+  position: absolute;
+  top: unset;
+  /* cancel out the sticky top so it defaults back to the flex center */
+  transform: translateX(-75vw);
+  /* using separate rotate property in stead of transform allows us more controll over the animation :) */
+  rotate: rotate(var(--rotate));
+
+  &:nth-of-type(odd) {
+    transform: translateX(75vw);
+    --rotate: 10deg;
+  }
+
+  &:nth-of-type(1) {
+    --rotate: 0;
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation-timeline: var(--animation-timeline);
+      animation-name: to-center;
+      animation-fill-mode: both;
+      /* animation ranges are pure magic to me, somehow this specific range allows you to animate sticky items as soon as the hit the top of the screen: */
+      animation-range: entry 100lvh exit;
+    }
+  }
+}
+
+@keyframes to-center {
+  70% {
+    rotate: calc(var(--rotate) * 0.5);
+  }
+
+  100% {
+    transform: translateX(0);
+    rotate: calc(var(--rotate) * 0.5);
+  }
+}
