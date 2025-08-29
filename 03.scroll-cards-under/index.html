@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Scroll Triggers</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    :root {
+      --bg-color: #1f242d;
+      --second-bg-color: #8baffe;
+      --main-color: #7d5aa1f5;
+      --card-1-color: #ff6b6b;
+      --card-2-color: #4ecdc4;
+      --card-3-color: #ffd166;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg-color) 0%, #2c3e50 100%);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .cards {
+      position: relative;
+      width: 100%;
+      height: 300lvh;
+    }
+
+    .card-scroll-triggers {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 100lvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-scroll-triggers div {
+      width: 100%;
+      flex-grow: 1;
+      writing-mode: vertical-rl;
+      padding: 0.2em;
+      text-align: center;
+    }
+
+    .cards__inner {
+      position: sticky;
+      top: 0;
+      height: 100lvh;
+      display: flex;
+      gap: 1rem;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+    }
+
+    .card {
+      position: absolute;
+      min-width: 20vw;
+      max-width: 40vw;
+      max-height: 70vh;
+      aspect-ratio: 3/4;
+      border-radius: 2rem;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      --rotate: -10deg;
+      transform: translateX(-75vw) scale(0.9);
+      rotate: var(--rotate);
+      opacity: 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s ease;
+      overflow: hidden;
+    }
+
+    .card:nth-of-type(odd) {
+      transform: translateX(75vw) scale(0.9);
+      --rotate: 10deg;
+    }
+
+    .card:nth-of-type(1) {
+      --rotate: 0deg;
+      z-index: 3;
+      box-shadow: 0 15px 35px rgba(126, 90, 161, 0.4);
+    }
+
+    .card:nth-of-type(2) {
+      z-index: 2;
+      box-shadow: 0 15px 35px rgba(79, 205, 196, 0.4);
+    }
+
+    .card:nth-of-type(3) {
+      z-index: 1;
+      box-shadow: 0 15px 35px rgba(255, 209, 102, 0.4);
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2rem;
+      transition: all 0.8s ease;
+    }
+
+    .skills-box {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 2rem;
+      overflow: hidden;
+    }
+
+    .skills-layer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.1), var(--main-color));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 0 4rem;
+      border-radius: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .skills-box:hover .skills-layer {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skills-layer h4 {
+      font-size: 2.5rem;
+      color: #faf5fe;
+      text-shadow: 0 0 10px rgba(118, 75, 162, 0.8);
+      margin-top: 2.5rem;
+      margin-bottom: 0.8rem;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.5s ease 0.2s;
+    }
+
+    .skills-box:hover .skills-layer h4 {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .skills-layer p,
+    .skills-layer ul {
+      color: #f4e8ff;
+      text-shadow: 0 0 10px rgba(118, 75, 162, 0.8);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.5s ease 0.3s;
+    }
+
+    .skills-box:hover .skills-layer p,
+    .skills-box:hover .skills-layer ul {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .skills-layer p {
+      font-size: 1.35rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .skills-layer .programming {
+      font-size: 1.6rem;
+      text-align: center;
+    }
+
+    .skills-layer ul {
+      font-size: 1.3rem;
+      font-style: italic;
+      list-style: none;
+      padding: 0;
+    }
+
+    .skills-layer li {
+      margin-bottom: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .skills-layer li:hover {
+      transform: scale(1.05);
+      color: #ffffff;
+    }
+
+    /* Enhanced animations */
+    @supports (animation-timeline: view()) {
+      @media (prefers-reduced-motion: no-preference) {
+        .card {
+          animation-timeline: var(--animation-timeline);
+          animation-name: to-center;
+          animation-fill-mode: both;
+          animation-range: entry 100lvh exit;
+        }
+      }
+    }
+
+    @keyframes to-center {
+      0% {
+        opacity: 0;
+        transform: translateX(-75vw) scale(0.8) rotate(calc(var(--rotate) * 1.2));
+        filter: blur(10px);
+      }
+
+      30% {
+        opacity: 0.8;
+        filter: blur(5px);
+      }
+
+      70% {
+        rotate: calc(var(--rotate) * 0.5);
+        transform: translateX(calc(-75vw * 0.3)) scale(1.05);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1) rotate(calc(var(--rotate) * 0.5));
+        filter: blur(0);
+      }
+    }
+
+    /* Additional effects for odd cards */
+    .card:nth-of-type(odd) {
+      @supports (animation-timeline: view()) {
+        @media (prefers-reduced-motion: no-preference) {
+          animation-name: to-center-odd;
+        }
+      }
+    }
+
+    @keyframes to-center-odd {
+      0% {
+        opacity: 0;
+        transform: translateX(75vw) scale(0.8) rotate(calc(var(--rotate) * 1.2));
+        filter: blur(10px);
+      }
+
+      30% {
+        opacity: 0.8;
+        filter: blur(5px);
+      }
+
+      70% {
+        rotate: calc(var(--rotate) * 0.5);
+        transform: translateX(calc(75vw * 0.3)) scale(1.05);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1) rotate(calc(var(--rotate) * 0.5));
+        filter: blur(0);
+      }
+    }
+
+    /* Background elements for visual interest */
+    .bg-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .bg-element {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.3;
+      filter: blur(40px);
+    }
+
+    .bg-element-1 {
+      width: 300px;
+      height: 300px;
+      background: var(--card-1-color);
+      top: 10%;
+      left: 10%;
+      animation: float 15s ease-in-out infinite;
+    }
+
+    .bg-element-2 {
+      width: 400px;
+      height: 400px;
+      background: var(--card-2-color);
+      bottom: 10%;
+      right: 10%;
+      animation: float 18s ease-in-out infinite reverse;
+    }
+
+    .bg-element-3 {
+      width: 250px;
+      height: 250px;
+      background: var(--card-3-color);
+      top: 50%;
+      left: 80%;
+      animation: float 12s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-30px) rotate(10deg);
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .card {
+        min-width: 30vw;
+        max-width: 50vw;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        min-width: 60vw;
+        max-width: 80vw;
+      }
+
+      .skills-layer {
+        padding: 0 2rem;
+      }
+
+      .skills-layer h4 {
+        font-size: 2rem;
+      }
+
+      .skills-layer p {
+        font-size: 1.1rem;
+      }
+
+      .skills-layer ul {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-elements">
+    <div class="bg-element bg-element-1"></div>
+    <div class="bg-element bg-element-2"></div>
+    <div class="bg-element bg-element-3"></div>
+  </div>
+
+  <section class="cards" style="timeline-scope: --trigger-1, --trigger-2, --trigger-3;">
+    <div class="card-scroll-triggers">
+      <div style="view-timeline: --trigger-1;"></div>
+      <div style="view-timeline: --trigger-2;"></div>
+      <div style="view-timeline: --trigger-3;"></div>
+    </div>
+
+    <div class="cards__inner">
+      <div class="card skills-box" style="--animation-timeline: --trigger-1;">
+        <img
+          src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZ3JhbW1pbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=80"
+          alt="Programming">
+        <div class="skills-layer">
+          <h4>Programming</h4>
+          <p class="programming">Languages I know&#58;</p>
+          <ul>
+            <li>C&#43;&#43;</li>
+            <li>C&#35;</li>
+            <li>Python</li>
+            <li>Java</li>
+            <li>JavaScript</li>
+            <li>HTML&#44; CSS</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card skills-box" style="--animation-timeline: --trigger-2;">
+        <img
+          src="https://images.unsplash.com/photo-1565106430482-8f6e74349ca1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          alt="Web Design">
+        <div class="skills-layer">
+          <h4>Web Design</h4>
+          <p>Proficient in crafting visually appealing and user-friendly web interfaces through creative design and
+            intuitive navigation.</p>
+        </div>
+      </div>
+      <div class="card skills-box" style="--animation-timeline: --trigger-3;">
+        <img
+          src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Z2l0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+          alt="Git">
+        <div class="skills-layer">
+          <h4>Git</h4>
+          <p>Most frequently used version control system. Worked on a variety of collaborative projects that utilized
+            Git workflow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Additional interactive effects
+    document.addEventListener('DOMContentLoaded', function () {
+      const cards = document.querySelectorAll('.card');
+
+      // Add parallax effect to images on mouse move
+      cards.forEach(card => {
+        card.addEventListener('mousemove', function (e) {
+          const img = this.querySelector('img');
+          const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+          const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+          img.style.transform = `scale(1.05) translate(${xAxis}px, ${yAxis}px)`;
+        });
+
+        card.addEventListener('mouseleave', function () {
+          const img = this.querySelector('img');
+          img.style.transform = 'scale(1) translate(0, 0)';
+        });
+      });
+
+      // Add subtle glow effect on hover
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function () {
+          this.style.boxShadow = `0 20px 40px rgba(126, 90, 161, 0.6)`;
+          this.style.transform = 'translateZ(20px)';
+        });
+
+        card.addEventListener('mouseleave', function () {
+          this.style.boxShadow = '';
+          this.style.transform = '';
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
