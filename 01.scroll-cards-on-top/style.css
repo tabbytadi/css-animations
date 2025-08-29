@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scroll Triggered Image Cards</title>
-  <style>
-    * {
+/* * {
       box-sizing: border-box;
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -189,84 +181,8 @@
         min-width: 60vw;
         max-width: 80vw;
       }
-
+      
       h1 {
         font-size: 2rem;
       }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
-    <header>
-      <h1>Scroll Triggered Image Cards</h1>
-      <p class="subtitle">Scroll down to see the animation effect with images</p>
-    </header>
-
-    <div class="instructions">
-      <h2>How It Works</h2>
-      <ul>
-        <li>As you scroll down, each card will animate into view from the sides</li>
-        <li>The first card comes from the top, while others come from left and right</li>
-        <li>Each card contains an image related to web development skills</li>
-        <li>Hover over cards to see a slight zoom effect on the image</li>
-      </ul>
-    </div>
-
-    <section class="cards" style="timeline-scope: --trigger-1, --trigger-2, --trigger-3;">
-      <div class="card-scroll-triggers">
-        <div style="view-timeline: --trigger-1;"></div>
-        <div style="view-timeline: --trigger-2;"></div>
-        <div style="view-timeline: --trigger-3;"></div>
-      </div>
-
-      <div class="cards__inner">
-        <div class="card" style="--animation-timeline: --trigger-1;">
-          <img
-            src="https://images.unsplash.com/photo-1565106430482-8f6e74349ca1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8d2ViJTIwZGVzaWdufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=80"
-            alt="Web Design">
-          <div class="card-title">Web Design</div>
-        </div>
-        <div class="card" style="--animation-timeline: --trigger-2;">
-          <img
-            src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZ3JhbW1pbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=80"
-            alt="Programming">
-          <div class="card-title">Programming</div>
-        </div>
-        <div class="card" style="--animation-timeline: --trigger-3;">
-          <img
-            src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z2l0fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=80"
-            alt="Git Version Control">
-          <div class="card-title">Git Version Control</div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <p>Scroll triggered animation with CSS | Modern web development techniques</p>
-    </footer>
-  </div>
-
-  <script>
-    // Additional interactive effect
-    document.addEventListener('DOMContentLoaded', function () {
-      const cards = document.querySelectorAll('.card');
-
-      cards.forEach(card => {
-        card.addEventListener('mouseenter', function () {
-          this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-          this.style.transform = 'translateY(-10px)';
-          this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.4)';
-        });
-
-        card.addEventListener('mouseleave', function () {
-          this.style.transform = '';
-          this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
-        });
-      });
-    });
-  </script>
-</body>
-
-</html>
+    } */

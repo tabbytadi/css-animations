@@ -2,7 +2,12 @@
   box-sizing: border-box;
   margin: 0;
   font-family: sans-serif;
+}
 
+:root {
+  --bg-color: #1f242d;
+  --second-bg-color: #8baffe;
+  --main-color: #7d5aa1f5;
 }
 
 .cards {
@@ -41,15 +46,91 @@
   align-items: center;
 }
 
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2rem;
+}
+
+.card-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.skills-box .skills-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, .1), var(--main-color));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 0 4rem;
+  border-radius: 2rem;
+}
+
+.skills-container .skills-box {
+  position: relative;
+  border-radius: 2rem;
+  box-shadow: 0 0 1rem var(--bg-color);
+}
+
+.skills-box:hover .skills-layer {
+  transform: translateY(0);
+}
+
+.skills-layer h4 {
+  font-size: 2.5rem;
+  color: #faf5fe;
+  text-shadow: 0 0 10px #764ba2;
+  margin-top: 2.5rem;
+  margin-bottom: .8rem;
+}
+
+.skills-layer p,
+.skills-layer ul {
+  color: #f4e8ff;
+  text-shadow: 0 0 10px #764ba2;
+}
+
+.skills-layer p {
+  font-size: 1.35rem;
+  margin-bottom: 0.3rem;
+  width: 150%;
+}
+
+.skills-layer .programming {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.skills-layer ul {
+  font-size: 1.3rem;
+  font-style: italic;
+  list-style: none;
+  padding: 0;
+}
+
 .card {
   position: sticky;
-  /* backup if animation timeline is not supported */
   top: 0;
   min-width: 20vw;
   max-width: 40vw;
   max-height: 70vh;
   aspect-ratio: 3/4;
-  border: 2px solid #111;
   border-radius: 3rem;
   font-size: 10vw;
   background: #fff;
@@ -59,9 +140,7 @@
   --rotate: -10deg;
   position: absolute;
   top: unset;
-  /* cancel out the sticky top so it defaults back to the flex center */
   transform: translateX(-75vw);
-  /* using separate rotate property in stead of transform allows us more controll over the animation :) */
   rotate: rotate(var(--rotate));
 
   &:nth-of-type(odd) {
