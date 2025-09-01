@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixed Image Container with No White Gaps</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #2c3e50;
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #7f8c8d;
+    }
+
+    .content-wrapper {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .images-container {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+      height: 800px;
+    }
+
+
+
+    .image-figure {
+      position: absolute;
+      width: 300px;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transition: box-shadow 0.3s ease;
+      will-change: transform;
+    }
+
+    .image-figure:hover {
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .image-figure--1 {
+      left: 20%;
+      top: 50px;
+      transform: rotate(-3deg);
+    }
+
+    .image-figure--2 {
+      left: 45%;
+      top: -10px;
+      transform: rotate(10deg);
+    }
+
+    .image-figure img {
+      object-fit: cover;
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .image-figure--1 img {
+      width: 140%;
+      height: 155%;
+    }
+
+    .image-figure--2 img {
+      width: 155%;
+      height: 170%;
+    }
+
+
+
+
+
+
+
+
+    .text-content {
+      flex: 1;
+      min-width: 300px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-content h2 {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+
+    .text-content p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #34495e;
+    }
+
+    .text-content .highlight {
+      background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+      padding: 30px;
+      border-radius: 10px;
+      margin: 30px 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-content ul {
+      padding-left: 20px;
+      margin-bottom: 30px;
+    }
+
+    .text-content li {
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .text-content li:before {
+      content: "•";
+      color: #3498db;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #7f8c8d;
+      font-size: 1rem;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .content-wrapper {
+        flex-direction: column;
+      }
+
+      .images-container {
+        height: 700px;
+      }
+
+      .image-figure {
+        width: 320px;
+        height: 500px;
+      }
+
+      .image-figure--1 {
+        left: 10%;
+      }
+
+      .image-figure--2 {
+        left: 30%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .images-container {
+        height: 600px;
+      }
+
+      .image-figure {
+        width: 250px;
+        height: 400px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .text-content h2 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="about" id="about-me">
+    <div class="about-container">
+      <header>
+        <h1>Fixed Image Container with No White Gaps</h1>
+        <p class="subtitle">Images are now larger than their containers to prevent white gaps when tilting</p>
+      </header>
+
+      <div class="content-wrapper">
+        <div class="images-container">
+          <figure class="image-figure image-figure--1">
+            <img src="./images/code.png">
+          </figure>
+          <figure class="image-figure image-figure--2">
+            <img src="./images/me2.png">
+          </figure>
+        </div>
+
+        <div class="text-content">
+          <h2>Enhanced Scroll Effects</h2>
+          <p>This updated design ensures the images are larger than their containers to prevent white gaps when tilting
+            during scroll animations.</p>
+
+          <div class="highlight">
+            <p>The key changes include making images 120% of container size, centering them, and using higher resolution
+              source images.</p>
+          </div>
+
+          <h2>How It Works</h2>
+          <p>The enhanced design addresses the white gap issue:</p>
+          <ul>
+            <li>Images are now 120% the size of their containers</li>
+            <li>Images are absolutely positioned and centered</li>
+            <li>Higher resolution source images are used</li>
+            <li>The right image is positioned further to the right</li>
+            <li>Maintained all scroll interaction effects</li>
+          </ul>
+
+          <p>Try scrolling to see the enhanced tilt effect without any white gaps appearing around the images.</p>
+
+          <p>The images will now tilt dramatically as you scroll, creating a more engaging visual effect without any
+            distracting background showing through.</p>
+        </div>
+      </div>
+  </section>
+
+  <footer>
+    <p>Created with GSAP ScrollTrigger | Images from Unsplash</p>
+  </footer>
+  </div>
+
+
+  <script src="./index.js"></script>
+</body>
+
+</html>
