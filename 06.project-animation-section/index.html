@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Showcase | Interactive Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%);
+      color: #fff;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 15px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid rgba(0, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 3rem;
+      background: linear-gradient(to right, #00ffff, #ff00ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.8rem 1.5rem;
+      background: rgba(13, 13, 13, 0.8);
+      color: #00ffff;
+      border: 1px solid #00ffff;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .filter-btn:hover {
+      background: rgba(0, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(to right, #00ffff, #ff00ff);
+      color: #0d0d0d;
+      border-color: #00ffff;
+    }
+
+    .projects-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .project {
+      display: flex;
+      margin-bottom: 6rem;
+      align-items: center;
+      min-height: 400px;
+      padding: 2rem;
+      background: rgba(13, 13, 13, 0.5);
+      border-radius: 15px;
+      border: 1px solid rgba(0, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .project:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .image-container {
+      flex: 1;
+      perspective: 1200px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .project-image {
+      width: 400px;
+      max-width: 90%;
+      height: 300px;
+      object-fit: cover;
+      transition: all 0.8s ease;
+      box-shadow: -20px 40px 60px rgba(0, 255, 255, 0.4);
+      transform: perspective(1200px) rotateY(25deg) scale(0.9);
+      border-radius: 1rem;
+    }
+
+    .project:nth-child(even) .project-image {
+      transform: perspective(1200px) rotateY(-25deg) scale(0.9);
+      box-shadow: 20px 40px 60px rgba(255, 0, 200, 0.4);
+    }
+
+    .project-image:hover {
+      transform: perspective(1200px) rotateY(-25deg) scale(1.2);
+      box-shadow: none;
+    }
+
+    .project:nth-child(even) .project-image:hover {
+      transform: perspective(1200px) rotateY(25deg) scale(1.2);
+      box-shadow: none;
+    }
+
+    .project-content {
+      flex: 1;
+      padding: 2rem;
+      z-index: 2;
+    }
+
+    .project-title {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #00ffff, #ff00ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .project-desc {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #94a3b8;
+      margin-bottom: 2rem;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .project-tag {
+      padding: 0.3rem 0.8rem;
+      background: rgba(0, 255, 255, 0.1);
+      color: #00ffff;
+      border-radius: 15px;
+      font-size: 0.9rem;
+    }
+
+    .visit-btn {
+      padding: 1rem 2rem;
+      background: linear-gradient(to right, #00ffff, #ff00ff);
+      color: #0d0d0d;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .visit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 0, 200, 0.6);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 2rem;
+      color: #94a3b8;
+      border-top: 1px solid rgba(0, 255, 255, 0.1);
+    }
+
+    @media (max-width: 900px) {
+      .project {
+        flex-direction: column !important;
+        margin-bottom: 4rem;
+      }
+
+      .image-container,
+      .project-content {
+        width: 100%;
+      }
+
+      .project-content {
+        padding: 1.5rem 0;
+      }
+
+      .project-image {
+        transform: perspective(1000px) rotateY(0deg) scale(1);
+        box-shadow: none;
+        margin-bottom: 2rem;
+      }
+
+      .project-image:hover {
+        transform: perspective(1000px) rotateY(0deg) scale(1.1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Project Showcase</h1>
+    <p class="subtitle">Interactive portfolio with immersive 3D hover effects and project filtering</p>
+  </header>
+
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-section="all">
+      <i class="fas fa-layer-group"></i> All Projects
+    </button>
+    <button class="filter-btn" data-section="web">
+      <i class="fas fa-code"></i> Web Development
+    </button>
+    <button class="filter-btn" data-section="mobile">
+      <i class="fas fa-mobile-alt"></i> Mobile Apps
+    </button>
+    <button class="filter-btn" data-section="design">
+      <i class="fas fa-paint-brush"></i> UI/UX Design
+    </button>
+    <button class="filter-btn" data-section="ai">
+      <i class="fas fa-robot"></i> AI & Machine Learning
+    </button>
+  </div>
+
+  <div class="projects-container">
+    <!-- Web Development Projects -->
+    <div class="project" data-section="web">
+      <div class="image-container">
+        <img
+          src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+          alt="Web Project" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">E-Commerce Platform</h2>
+        <div class="project-tags">
+          <span class="project-tag">React</span>
+          <span class="project-tag">Node.js</span>
+          <span class="project-tag">MongoDB</span>
+        </div>
+        <p class="project-desc">A full-featured online store with product filtering, shopping cart, and secure payment
+          processing. Built with modern web technologies.</p>
+        <button class="visit-btn">
+          <i class="fas fa-external-link-alt"></i> View Project
+        </button>
+      </div>
+    </div>
+
+    <div class="project" data-section="web">
+      <div class="image-container">
+        <img
+          src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80"
+          alt="Web Project" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Social Media Dashboard</h2>
+        <div class="project-tags">
+          <span class="project-tag">Vue.js</span>
+          <span class="project-tag">Firebase</span>
+          <span class="project-tag">Chart.js</span>
+        </div>
+        <p class="project-desc">Analytics dashboard for social media management with real-time metrics, audience
+          insights, and content performance tracking.</p>
+        <button class="visit-btn">
+          <i class="fas fa-external-link-alt"></i> View Project
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile App Projects -->
+    <div class="project" data-section="mobile">
+      <div class="image-container">
+        <img
+          src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1164&q=80"
+          alt="Mobile Project" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Fitness Tracker App</h2>
+        <div class="project-tags">
+          <span class="project-tag">React Native</span>
+          <span class="project-tag">HealthKit</span>
+          <span class="project-tag">GraphQL</span>
+        </div>
+        <p class="project-desc">A mobile application for tracking workouts, nutrition, and health metrics with
+          personalized recommendations and progress charts.</p>
+        <button class="visit-btn">
+          <i class="fas fa-external-link-alt"></i> View Project
+        </button>
+      </div>
+    </div>
+
+    <!-- Design Projects -->
+    <div class="project" data-section="design">
+      <div class="image-container">
+        <img
+          src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1164&q=80"
+          alt="Design Project" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Banking App UI Design</h2>
+        <div class="project-tags">
+          <span class="project-tag">Figma</span>
+          <span class="project-tag">UI Design</span>
+          <span class="project-tag">Prototyping</span>
+        </div>
+        <p class="project-desc">A modern and intuitive user interface for a mobile banking application, focusing on
+          simplicity and ease of use for all age groups.</p>
+        <button class="visit-btn">
+          <i class="fas fa-external-link-alt"></i> View Project
+        </button>
+      </div>
+    </div>
+
+    <!-- AI Projects -->
+    <div class="project" data-section="ai">
+      <div class="image-container">
+        <img
+          src="https://images.unsplash.com/photo-1555255707-c07966088b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+          alt="AI Project" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Predictive Analytics Engine</h2>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">TensorFlow</span>
+          <span class="project-tag">Data Visualization</span>
+        </div>
+        <p class="project-desc">Machine learning system that analyzes historical data to predict future trends and
+          provide actionable insights for business decision-making.</p>
+        <button class="visit-btn">
+          <i class="fas fa-external-link-alt"></i> View Project
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2023 Project Showcase | Interactive Portfolio</p>
+    <p>Hover over the project images to see the 3D effect</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const projects = document.querySelectorAll('.project');
+
+      // Filter projects based on section
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const section = button.getAttribute('data-section');
+
+          // Update active button
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+
+          // Show/hide projects based on section
+          projects.forEach(project => {
+            if (section === 'all' || project.getAttribute('data-section') === section) {
+              project.classList.remove('hidden');
+            } else {
+              project.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      // Add hover effect with JavaScript for additional interactivity
+      const imageContainers = document.querySelectorAll('.image-container');
+
+      imageContainers.forEach(container => {
+        container.addEventListener('mouseenter', () => {
+          container.style.zIndex = '20';
+        });
+
+        container.addEventListener('mouseleave', () => {
+          container.style.zIndex = '1';
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
