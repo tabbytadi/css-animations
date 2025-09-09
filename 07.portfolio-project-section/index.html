@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Portfolio | Interactive Showcase</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(to right, #818cf8, #f472b6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 3rem;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.8rem 1.5rem;
+      background: rgba(30, 41, 59, 0.8);
+      color: #cbd5e1;
+      border: 1px solid #334155;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover {
+      background: rgba(51, 65, 85, 0.8);
+      transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(to right, #818cf8, #f472b6);
+      color: white;
+      border-color: #818cf8;
+    }
+
+    .projects-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .project {
+      display: flex;
+      margin-bottom: 6rem;
+      align-items: center;
+      min-height: 400px;
+    }
+
+    .project-tech {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-tech span {
+      margin: 0 0.5rem;
+      color: #64748b;
+    }
+
+
+    .project:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .image-container {
+      flex: 1;
+      position: relative;
+      perspective: 1500px;
+      transform-style: preserve-3d;
+      height: 350px;
+    }
+
+    .project-image {
+      width: 90%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+      transform: rotateY(25deg) rotateX(12deg) skewY(-3deg) translateY(15px);
+      box-shadow:
+        0 0 25px rgba(129, 140, 248, 0.6),
+        0 0 50px rgba(129, 140, 248, 0.3);
+      transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      filter: brightness(0.9);
+    }
+
+    .project:nth-child(even) .project-image {
+      transform: rotateY(-25deg) rotateX(12deg) skewY(3deg) translateY(15px);
+      box-shadow:
+        -25px 0 25px rgba(129, 140, 248, 0.6),
+        -50px 0 50px rgba(129, 140, 248, 0.3);
+    }
+
+    .image-container:hover .project-image {
+      transform: rotateY(-20deg) rotateX(0deg) skewY(3deg) scale(1.2) translateY(-20px);
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+      filter: brightness(1.1);
+      z-index: 10;
+    }
+
+    .project:nth-child(even) .image-container:hover .project-image {
+      transform: rotateY(20deg) rotateX(0deg) skewY(-3deg) scale(1.2) translateY(-20px);
+    }
+
+    .project-content {
+      flex: 1;
+      padding: 2rem;
+      z-index: 2;
+    }
+
+    .project-title {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #818cf8, #f472b6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .project-desc {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #94a3b8;
+      margin-bottom: 2rem;
+    }
+
+    .visit-btn {
+      padding: 1rem 2rem;
+      background: linear-gradient(to right, #818cf8, #f472b6);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(129, 140, 248, 0.4);
+    }
+
+    .visit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(129, 140, 248, 0.6);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .project {
+        flex-direction: column !important;
+        margin-bottom: 4rem;
+      }
+
+      .image-container,
+      .project-content {
+        width: 100%;
+      }
+
+      .project-content {
+        padding: 1.5rem 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Project Portfolio</h1>
+    <p class="subtitle">Interactive showcase of my creative projects with immersive hover effects</p>
+  </header>
+
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-section="all">All Projects</button>
+    <button class="filter-btn" data-section="web">Web Development</button>
+    <button class="filter-btn" data-section="mobile">Mobile Apps</button>
+    <button class="filter-btn" data-section="design">UI/UX Design</button>
+  </div>
+
+  <div class="projects-container">
+    <!-- Web Development Projects -->
+    <div class="project" data-section="web">
+      <div class="image-container">
+        <img src="./images/project_img/medical-records_project.jpg" alt="Medical Records" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Medical Records Platform</h2>
+        <p class="project-tech">
+          React <span>|</span> Node.js <span>|</span> MongoDB <span>|</span> Bootstrap
+        </p>
+        <p class="project-desc">A full-featured online store with product filtering, shopping cart, and secure payment
+          processing. Built with React, Node.js, and MongoDB.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+
+
+    <div class="project" data-section="web">
+      <div class="image-container">
+        <img
+          src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+          alt="Web Project" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Social Media Dashboard</h2>
+        <p class="project-desc">Analytics dashboard for social media management with real-time metrics, audience
+          insights, and content performance tracking.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+
+    <!-- Mobile App Projects -->
+    <div class="project" data-section="mobile">
+      <div class="image-container">
+        <img
+          src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1164&q=80"
+          alt="Mobile Project" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Fitness Tracker App</h2>
+        <p class="project-desc">A mobile application for tracking workouts, nutrition, and health metrics with
+          personalized recommendations and progress charts.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+
+    <!-- Design Projects -->
+    <div class="project" data-section="design">
+      <div class="image-container">
+        <img
+          src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1164&q=80"
+          alt="Design Project" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Banking App UI Design</h2>
+        <p class="project-desc">A modern and intuitive user interface for a mobile banking application, focusing on
+          simplicity and ease of use for all age groups.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+
+    <div class="project" data-section="design">
+      <div class="image-container">
+        <img
+          src="https://images.unsplash.com/photo-1551909497-5d11d0e7c5fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
+          alt="Design Project" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Travel Website Design</h2>
+        <p class="project-desc">A visually stunning travel website design with immersive imagery, intuitive
+          navigation,
+          and seamless booking experience.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const projects = document.querySelectorAll('.project');
+
+      // Filter projects based on section
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const section = button.getAttribute('data-section');
+
+          // Update active button
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+
+          // Show/hide projects based on section
+          projects.forEach(project => {
+            if (section === 'all' || project.getAttribute('data-section') === section) {
+              project.classList.remove('hidden');
+            } else {
+              project.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      // Add hover effect with JavaScript for additional interactivity
+      const imageContainers = document.querySelectorAll('.image-container');
+
+      imageContainers.forEach(container => {
+        container.addEventListener('mouseenter', () => {
+          container.style.zIndex = '20';
+        });
+
+        container.addEventListener('mouseleave', () => {
+          container.style.zIndex = '1';
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
