@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <title>Project Portfolio | Interactive Showcase</title>
   <style>
     * {
@@ -82,19 +84,17 @@
       margin-bottom: 6rem;
       align-items: center;
       min-height: 400px;
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.6s ease;
     }
 
-    .project-tech {
-      font-size: 0.95rem;
-      color: #cbd5e1;
-      margin-bottom: 1.5rem;
+    .project.hidden {
+      opacity: 0;
+      transform: translateY(40px);
+      pointer-events: none;
+      position: absolute;
     }
-
-    .project-tech span {
-      margin: 0 0.5rem;
-      color: #64748b;
-    }
-
 
     .project:nth-child(even) {
       flex-direction: row-reverse;
@@ -136,7 +136,7 @@
     }
 
     .project:nth-child(even) .image-container:hover .project-image {
-      transform: rotateY(20deg) rotateX(0deg) skewY(-3deg) scale(1.2) translateY(-20px);
+      transform: rotateY(20deg) rotateX(0deg) skewY(-3deg) scale(1.2) translateY(-20px) translateX(40px);
     }
 
     .project-content {
@@ -147,11 +147,22 @@
 
     .project-title {
       font-size: 2.2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       background: linear-gradient(to right, #818cf8, #f472b6);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+    }
+
+    .project-tech {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-tech span {
+      margin: 0 0.5rem;
+      color: #64748b;
     }
 
     .project-desc {
@@ -177,10 +188,6 @@
     .visit-btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(129, 140, 248, 0.6);
-    }
-
-    .hidden {
-      display: none;
     }
 
     @media (max-width: 900px) {
@@ -210,83 +217,174 @@
   <div class="filter-buttons">
     <button class="filter-btn active" data-section="all">All Projects</button>
     <button class="filter-btn" data-section="web">Web Development</button>
-    <button class="filter-btn" data-section="mobile">Mobile Apps</button>
+    <button class="filter-btn" data-section="databases">Databases</button>
+    <button class="filter-btn" data-section="programming">Programming</button>
+    <button class="filter-btn" data-section="multithreading">Multithreading</button>
+    <button class="filter-btn" data-section="ai">AI</button>
+    <button class="filter-btn" data-section="testing">Testing</button>
     <button class="filter-btn" data-section="design">UI/UX Design</button>
   </div>
 
   <div class="projects-container">
-    <!-- Web Development Projects -->
-    <div class="project" data-section="web">
+
+    <!-- WEB DEVELOPMENT -->
+    <div class="project" data-section="web databases">
       <div class="image-container">
-        <img src="./images/project_img/medical-records_project.jpg" alt="Medical Records" class="project-image">
+        <img src="./images/project_img/medical_records.jpg" alt="Medical Records" class="project-image">
       </div>
       <div class="project-content">
         <h2 class="project-title">Medical Records Platform</h2>
-        <p class="project-tech">
-          React <span>|</span> Node.js <span>|</span> MongoDB <span>|</span> Bootstrap
-        </p>
-        <p class="project-desc">A full-featured online store with product filtering, shopping cart, and secure payment
-          processing. Built with React, Node.js, and MongoDB.</p>
+        <p class="project-tech">Java <span>|</span> Databases <span>|</span> OOP</p>
+        <p class="project-desc">A system for managing patients’ medical history with a database-driven backend.</p>
         <button class="visit-btn">View Project</button>
       </div>
     </div>
 
+    <div class="project" data-section="web ai">
+      <div class="image-container">
+        <img src="./images/project_img/learn-n-earn.jpg" alt="Learn and Earn" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Learn and Earn</h2>
+        <p class="project-tech">Python <span>|</span> AI <span>|</span> Databases</p>
+        <p class="project-desc">A gamified platform combining education and rewards, enhanced with AI models.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
 
     <div class="project" data-section="web">
       <div class="image-container">
-        <img
-          src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
-          alt="Web Project" class="project-image">
+        <img src="./images/project_img/angular_calculator.jpg" alt="Angular Calculator" class="project-image">
       </div>
       <div class="project-content">
-        <h2 class="project-title">Social Media Dashboard</h2>
-        <p class="project-desc">Analytics dashboard for social media management with real-time metrics, audience
-          insights, and content performance tracking.</p>
+        <h2 class="project-title">Angular Calculator</h2>
+        <p class="project-tech">Angular <span>|</span> TypeScript <span>|</span> HTML/CSS</p>
+        <p class="project-desc">An interactive calculator app built with Angular and styled components.</p>
         <button class="visit-btn">View Project</button>
       </div>
     </div>
 
-    <!-- Mobile App Projects -->
-    <div class="project" data-section="mobile">
+    <div class="project" data-section="web">
       <div class="image-container">
-        <img
-          src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1164&q=80"
-          alt="Mobile Project" class="project-image">
+        <img src="./images/project_img/youtube_clone.jpg" alt="YouTube Clone" class="project-image">
       </div>
       <div class="project-content">
-        <h2 class="project-title">Fitness Tracker App</h2>
-        <p class="project-desc">A mobile application for tracking workouts, nutrition, and health metrics with
-          personalized recommendations and progress charts.</p>
+        <h2 class="project-title">YouTube Clone</h2>
+        <p class="project-tech">HTML <span>|</span> CSS <span>|</span> JavaScript</p>
+        <p class="project-desc">A simplified clone of YouTube with responsive design and video embedding features.</p>
         <button class="visit-btn">View Project</button>
       </div>
     </div>
 
-    <!-- Design Projects -->
+    <!-- DATABASES -->
+    <div class="project" data-section="databases testing">
+      <div class="image-container">
+        <img src="./images/project_img/house_administrator.jpg" alt="House Administrator" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">House Administrator</h2>
+        <p class="project-tech">Java <span>|</span> Databases <span>|</span> Testing</p>
+        <p class="project-desc">Tracks building expenses like green spaces, elevators, pets, and apartment residents.
+        </p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+
+    <!-- PROGRAMMING -->
+    <div class="project" data-section="programming">
+      <div class="image-container">
+        <img src="./images/project_img/printing_house.jpg" alt="Printing House" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Printing House</h2>
+        <p class="project-tech">Java <span>|</span> OOP</p>
+        <p class="project-desc">A simulation of a printing house system applying OOP principles in Java.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+
+    <div class="project" data-section="programming">
+      <div class="image-container">
+        <img src="./images/project_img/maze_python.jpg" alt="Maze Solver" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Maze Solver</h2>
+        <p class="project-tech">Python <span>|</span> wxPython <span>|</span> GUI <span>|</span> Algorithms</p>
+        <p class="project-desc">A GUI-based Python application to solve mazes with pathfinding algorithms.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+
+    <div class="project" data-section="programming">
+      <div class="image-container">
+        <img src="./images/project_img/tictactoe_cplusplus.jpg" alt="Tic Tac Toe" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Tic Tac Toe</h2>
+        <p class="project-tech">C++ <span>|</span> OOP</p>
+        <p class="project-desc">A C++ console-based tic-tac-toe game implementing object-oriented programming.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+
+    <div class="project" data-section="programming">
+      <div class="image-container">
+        <img src="./images/project_img/hangman_python.jpg" alt="Hangman" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Hangman</h2>
+        <p class="project-tech">Python <span>|</span> GUI</p>
+        <p class="project-desc">A GUI implementation of the classic Hangman game with Python.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+
+    <!-- MULTITHREADING -->
+    <div class="project" data-section="multithreading">
+      <div class="image-container">
+        <img src="./images/project_img/multhithreading.jpg" alt="Multithreading Project" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Multithreading Project</h2>
+        <p class="project-tech">Java <span>|</span> Threads <span>|</span> Concurrency</p>
+        <p class="project-desc">A demonstration of multithreading concepts in Java for optimized performance.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+
+    <!-- UI/UX DESIGN -->
     <div class="project" data-section="design">
       <div class="image-container">
-        <img
-          src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1164&q=80"
-          alt="Design Project" class="project-image">
+        <img src="./images/project_img/pamphlet.jpg" alt="Pamphlet Design" class="project-image">
       </div>
       <div class="project-content">
-        <h2 class="project-title">Banking App UI Design</h2>
-        <p class="project-desc">A modern and intuitive user interface for a mobile banking application, focusing on
-          simplicity and ease of use for all age groups.</p>
+        <h2 class="project-title">Pamphlet Design</h2>
+        <p class="project-tech">Illustrator <span>|</span> Photoshop</p>
+        <p class="project-desc">A pamphlet designed to convey information clearly and attractively.</p>
         <button class="visit-btn">View Project</button>
       </div>
     </div>
 
     <div class="project" data-section="design">
       <div class="image-container">
-        <img
-          src="https://images.unsplash.com/photo-1551909497-5d11d0e7c5fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
-          alt="Design Project" class="project-image">
+        <img src="./images/project_img/photoshop_fine-dining.jpg" alt="Photoshop Mockup" class="project-image">
       </div>
       <div class="project-content">
-        <h2 class="project-title">Travel Website Design</h2>
-        <p class="project-desc">A visually stunning travel website design with immersive imagery, intuitive
-          navigation,
-          and seamless booking experience.</p>
+        <h2 class="project-title">Fine Dining Mockup</h2>
+        <p class="project-tech">Photoshop</p>
+        <p class="project-desc">A modern fine-dining UI design crafted in Photoshop.</p>
+        <button class="visit-btn">View Project</button>
+      </div>
+    </div>
+
+    <div class="project" data-section="design">
+      <div class="image-container">
+        <img src="./images/project_img/login.jpg" alt="Login Screen Design" class="project-image">
+      </div>
+      <div class="project-content">
+        <h2 class="project-title">Login Screen</h2>
+        <p class="project-tech">Figma <span>|</span> Canva</p>
+        <p class="project-desc">A clean, modern login screen design optimized for user experience.</p>
         <button class="visit-btn">View Project</button>
       </div>
     </div>
@@ -297,36 +395,23 @@
       const filterButtons = document.querySelectorAll('.filter-btn');
       const projects = document.querySelectorAll('.project');
 
-      // Filter projects based on section
       filterButtons.forEach(button => {
         button.addEventListener('click', () => {
           const section = button.getAttribute('data-section');
 
-          // Update active button
+          // update button styles
           filterButtons.forEach(btn => btn.classList.remove('active'));
           button.classList.add('active');
 
-          // Show/hide projects based on section
           projects.forEach(project => {
-            if (section === 'all' || project.getAttribute('data-section') === section) {
+            const projectSections = project.getAttribute('data-section').split(' ');
+
+            if (section === 'all' || projectSections.includes(section)) {
               project.classList.remove('hidden');
             } else {
               project.classList.add('hidden');
             }
           });
-        });
-      });
-
-      // Add hover effect with JavaScript for additional interactivity
-      const imageContainers = document.querySelectorAll('.image-container');
-
-      imageContainers.forEach(container => {
-        container.addEventListener('mouseenter', () => {
-          container.style.zIndex = '20';
-        });
-
-        container.addEventListener('mouseleave', () => {
-          container.style.zIndex = '1';
         });
       });
     });
