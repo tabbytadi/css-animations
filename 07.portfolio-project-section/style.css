@@ -5,6 +5,53 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+
+
+
+
+/* Button Styling */
+.btn-hover {
+  padding: 0 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 5px;
+  height: 50px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+
+  border-radius: 50px;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+  background-position: 100% 0;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+  animation: pulse 0.5s ease;
+  color: white;
+}
+
+.btn-hover:focus {
+  outline: none;
+}
+
+.btn-hover.color-purple {
+  background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+  box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+}
+
+
+
+
+
+
+
 :root {
   /* Dark theme (default) */
   --bg-primary: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -14,7 +61,6 @@
   --card-bg: rgba(30, 41, 59, 0.8);
   --card-border: #334155;
   --accent-gradient: linear-gradient(to right, #818cf8, #f472b6);
-  --btn-hover-bg: rgba(51, 65, 85, 0.8);
   --shadow-color: rgba(129, 140, 248, 0.6);
   --toggle-bg: #1e293b;
   --toggle-border: #334155;
@@ -30,7 +76,6 @@
   --card-bg: rgba(226, 232, 240, 0.8);
   --card-border: #cbd5e1;
   --accent-gradient: linear-gradient(to right, #4f46e5, #ec4899);
-  --btn-hover-bg: rgba(203, 213, 225, 0.8);
   --shadow-color: rgba(79, 70, 229, 0.4);
   --toggle-bg: #e2e8f0;
   --toggle-border: #cbd5e1;
@@ -51,6 +96,8 @@ header {
   margin-bottom: 3rem;
   position: relative;
 }
+
+
 
 .theme-toggle {
   position: absolute;
@@ -263,23 +310,6 @@ h1 {
   margin-bottom: 2rem;
 }
 
-.visit-btn {
-  padding: 1rem 2rem;
-  background: var(--accent-gradient);
-  color: white;
-  border: none;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px var(--shadow-color);
-}
-
-.visit-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px var(--shadow-color);
-}
 
 @media (max-width: 900px) {
   .project {
@@ -316,10 +346,6 @@ h1 {
   100% {
     transform: scale(1);
   }
-}
-
-.filter-btn.animate {
-  animation: pulse 0.5s ease;
 }
 
 /* Animation for project items */
