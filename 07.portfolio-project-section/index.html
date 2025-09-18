@@ -228,7 +228,7 @@
   <div class="projects-container">
 
     <!-- WEB DEVELOPMENT -->
-    <div class="project" data-section="web databases">
+    <div class="project" data-section="web databases" data-priority="all:1,web:2,databases:1">
       <div class="image-container">
         <img src="./images/project_img/medical_records.jpg" alt="Medical Records" class="project-image">
       </div>
@@ -240,7 +240,7 @@
       </div>
     </div>
 
-    <div class="project" data-section="web ai">
+    <div class="project" data-section="web ai" data-priority="all:2,web:1">
       <div class="image-container">
         <img src="./images/project_img/learn-n-earn.jpg" alt="Learn and Earn" class="project-image">
       </div>
@@ -252,7 +252,7 @@
       </div>
     </div>
 
-    <div class="project" data-section="web">
+    <div class="project" data-section="web" data-priority="all:3,web:3">
       <div class="image-container">
         <img src="./images/project_img/angular_calculator.jpg" alt="Angular Calculator" class="project-image">
       </div>
@@ -264,7 +264,7 @@
       </div>
     </div>
 
-    <div class="project" data-section="web">
+    <div class="project" data-section="web" data-priority="all:4,web:4">
       <div class="image-container">
         <img src="./images/project_img/youtube_clone.jpg" alt="YouTube Clone" class="project-image">
       </div>
@@ -277,7 +277,7 @@
     </div>
 
     <!-- DATABASES -->
-    <div class="project" data-section="databases testing">
+    <div class="project" data-section="databases testing" data-priority="all:5,databases:1">
       <div class="image-container">
         <img src="./images/project_img/house_administrator.jpg" alt="House Administrator" class="project-image">
       </div>
@@ -291,7 +291,7 @@
     </div>
 
     <!-- PROGRAMMING -->
-    <div class="project" data-section="programming">
+    <div class="project" data-section="programming" data-priority="all:6,programming:1">
       <div class="image-container">
         <img src="./images/project_img/printing_house.jpg" alt="Printing House" class="project-image">
       </div>
@@ -303,7 +303,7 @@
       </div>
     </div>
 
-    <div class="project" data-section="programming">
+    <div class="project" data-section="programming" data-priority="all:7,programming:2">
       <div class="image-container">
         <img src="./images/project_img/maze_python.jpg" alt="Maze Solver" class="project-image">
       </div>
@@ -315,7 +315,7 @@
       </div>
     </div>
 
-    <div class="project" data-section="programming">
+    <div class="project" data-section="programming" data-priority="all:8,programming:3">
       <div class="image-container">
         <img src="./images/project_img/tictactoe_cplusplus.jpg" alt="Tic Tac Toe" class="project-image">
       </div>
@@ -327,7 +327,7 @@
       </div>
     </div>
 
-    <div class="project" data-section="programming">
+    <div class="project" data-section="programming" data-priority="all:9,programming:4">
       <div class="image-container">
         <img src="./images/project_img/hangman_python.jpg" alt="Hangman" class="project-image">
       </div>
@@ -340,7 +340,7 @@
     </div>
 
     <!-- MULTITHREADING -->
-    <div class="project" data-section="multithreading">
+    <div class="project" data-section="multithreading" data-priority="all:10,multithreading:1">
       <div class="image-container">
         <img src="./images/project_img/multhithreading.jpg" alt="Multithreading Project" class="project-image">
       </div>
@@ -353,7 +353,7 @@
     </div>
 
     <!-- UI/UX DESIGN -->
-    <div class="project" data-section="design">
+    <div class="project" data-section="design" data-priority="all:11,design:1">
       <div class="image-container">
         <img src="./images/project_img/pamphlet.jpg" alt="Pamphlet Design" class="project-image">
       </div>
@@ -361,11 +361,12 @@
         <h2 class="project-title">Pamphlet Design</h2>
         <p class="project-tech">Illustrator <span>|</span> Photoshop</p>
         <p class="project-desc">A pamphlet designed to convey information clearly and attractively.</p>
-        <button class="visit-btn">View Project</button>
+        <button class="visit-btn" data-url="https://www.behance.net/gallery/234875053/Luxury-hotel-brochure">View
+          Project</button>
       </div>
     </div>
 
-    <div class="project" data-section="design">
+    <div class="project" data-section="design" data-priority="all:12,design:2">
       <div class="image-container">
         <img src="./images/project_img/photoshop_fine-dining.jpg" alt="Photoshop Mockup" class="project-image">
       </div>
@@ -377,7 +378,7 @@
       </div>
     </div>
 
-    <div class="project" data-section="design">
+    <div class="project" data-section="design" data-priority="all:13,design:3">
       <div class="image-container">
         <img src="./images/project_img/login.jpg" alt="Login Screen Design" class="project-image">
       </div>
@@ -393,7 +394,55 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const filterButtons = document.querySelectorAll('.filter-btn');
+      const projectsContainer = document.querySelector('.projects-container');
       const projects = document.querySelectorAll('.project');
+
+      // Function to get priority for a project based on current section
+      function getProjectPriority(project, section) {
+        const priorityData = project.getAttribute('data-priority');
+        if (!priorityData) return 999; // Default high number for projects without priority
+
+        const priorities = priorityData.split(',');
+        for (const priority of priorities) {
+          const [key, value] = priority.split(':');
+          if (key === section) {
+            return parseInt(value);
+          }
+        }
+
+        // If no specific priority for this section, check for "all" as fallback
+        for (const priority of priorities) {
+          const [key, value] = priority.split(':');
+          if (key === 'all') {
+            return parseInt(value);
+          }
+        }
+
+        return 999; // Default high number
+      }
+
+      // Function to reorder projects based on priority
+      function reorderProjects(section) {
+        const visibleProjects = Array.from(projects).filter(project => {
+          const projectSections = project.getAttribute('data-section').split(' ');
+          return section === 'all' || projectSections.includes(section);
+        });
+
+        // Sort projects by their priority for the current section
+        visibleProjects.sort((a, b) => {
+          const priorityA = getProjectPriority(a, section);
+          const priorityB = getProjectPriority(b, section);
+          return priorityA - priorityB;
+        });
+
+        // Remove all projects from container
+        projectsContainer.innerHTML = '';
+
+        // Add projects back in sorted order
+        visibleProjects.forEach(project => {
+          projectsContainer.appendChild(project);
+        });
+      }
 
       filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -403,17 +452,23 @@
           filterButtons.forEach(btn => btn.classList.remove('active'));
           button.classList.add('active');
 
+          // First hide all projects
           projects.forEach(project => {
             const projectSections = project.getAttribute('data-section').split(' ');
-
             if (section === 'all' || projectSections.includes(section)) {
               project.classList.remove('hidden');
             } else {
               project.classList.add('hidden');
             }
           });
+
+          // Then reorder the visible projects
+          reorderProjects(section);
         });
       });
+
+      // Initialize with all projects in correct order
+      reorderProjects('all');
     });
   </script>
 </body>
