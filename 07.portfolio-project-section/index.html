@@ -61,6 +61,21 @@
       cursor: pointer;
       font-weight: 600;
       transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .filter-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #818cf8, #f472b6);
+      transform: translateY(5px);
+      opacity: 0;
+      transition: all 0.3s ease;
     }
 
     .filter-btn:hover {
@@ -74,9 +89,32 @@
       border-color: #818cf8;
     }
 
+    .filter-btn.active::after {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
     .projects-container {
       max-width: 1200px;
       margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 2rem 0;
+      font-size: 2rem;
+      background: linear-gradient(to right, #818cf8, #f472b6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.5s ease;
+    }
+
+    .section-title.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .project {
@@ -84,16 +122,18 @@
       margin-bottom: 6rem;
       align-items: center;
       min-height: 400px;
-      opacity: 1;
-      transform: translateY(0);
+      opacity: 0;
+      transform: translateY(20px);
       transition: all 0.6s ease;
     }
 
+    .project.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .project.hidden {
-      opacity: 0;
-      transform: translateY(40px);
-      pointer-events: none;
-      position: absolute;
+      display: none;
     }
 
     .project:nth-child(even) {
@@ -205,6 +245,83 @@
         padding: 1.5rem 0;
       }
     }
+
+    /* Animation for filter buttons */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .filter-btn.animate {
+      animation: pulse 0.5s ease;
+    }
+
+    /* Animation for project items */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    /* Staggered animation delays */
+    .project:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .project:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .project:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .project:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .project:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    .project:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+
+    .project:nth-child(7) {
+      animation-delay: 0.7s;
+    }
+
+    .project:nth-child(8) {
+      animation-delay: 0.8s;
+    }
+
+    .project:nth-child(9) {
+      animation-delay: 0.9s;
+    }
+
+    .project:nth-child(10) {
+      animation-delay: 1.0s;
+    }
   </style>
 </head>
 
@@ -226,6 +343,7 @@
   </div>
 
   <div class="projects-container">
+    <h2 class="section-title" id="current-section">All Projects</h2>
 
     <!-- WEB DEVELOPMENT -->
     <div class="project" data-section="web databases" data-priority="all:1,web:2,databases:2">
@@ -235,7 +353,7 @@
       <div class="project-content">
         <h2 class="project-title">Medical Records Platform</h2>
         <p class="project-tech">Java <span>|</span> Databases <span>|</span> OOP</p>
-        <p class="project-desc">A system for managing patients’ medical history with a database-driven backend.</p>
+        <p class="project-desc">A system for managing patients' medical history with a database-driven backend.</p>
         <button class="visit-btn">View Project</button>
       </div>
     </div>
@@ -396,6 +514,19 @@
       const filterButtons = document.querySelectorAll('.filter-btn');
       const projectsContainer = document.querySelector('.projects-container');
       const projects = document.querySelectorAll('.project');
+      const currentSectionTitle = document.getElementById('current-section');
+
+      // Map button data-section to display text
+      const sectionTitles = {
+        'all': 'All Projects',
+        'web': 'Web Development',
+        'databases': 'Databases',
+        'programming': 'Programming',
+        'multithreading': 'Multithreading',
+        'ai': 'AI & Machine Learning',
+        'testing': 'Testing',
+        'design': 'UI/UX Design'
+      };
 
       // Function to get priority for a project based on current section
       function getProjectPriority(project, section) {
@@ -438,9 +569,20 @@
         // Remove all projects from container
         projectsContainer.innerHTML = '';
 
+        // Add section title
+        const sectionTitle = document.createElement('h2');
+        sectionTitle.className = 'section-title visible';
+        sectionTitle.id = 'current-section';
+        sectionTitle.textContent = sectionTitles[section];
+        projectsContainer.appendChild(sectionTitle);
+
         // Add projects back in sorted order
         visibleProjects.forEach(project => {
           projectsContainer.appendChild(project);
+          // Add fade-in animation class
+          setTimeout(() => {
+            project.classList.add('fade-in-up');
+          }, 100);
         });
       }
 
@@ -448,7 +590,13 @@
         button.addEventListener('click', () => {
           const section = button.getAttribute('data-section');
 
-          // update button styles
+          // Animate the button click
+          button.classList.add('animate');
+          setTimeout(() => {
+            button.classList.remove('animate');
+          }, 500);
+
+          // Update active button
           filterButtons.forEach(btn => btn.classList.remove('active'));
           button.classList.add('active');
 
