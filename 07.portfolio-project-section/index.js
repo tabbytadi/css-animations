@@ -28,6 +28,10 @@ document.addEventListener('DOMContentLoaded', function () {
   themeToggle.addEventListener('click', toggleTheme);
   initTheme();
 
+
+
+
+
   // Map button data-section to display text
   const sectionTitles = {
     'all': 'All Projects',
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    return 999; // Default high number
+    return 999;
   }
 
   // Function to reorder projects based on priority
@@ -91,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add projects back in sorted order
     visibleProjects.forEach(project => {
       projectsContainer.appendChild(project);
-      // Add fade-in animation class
       setTimeout(() => {
         project.classList.add('fade-in-up');
       }, 100);

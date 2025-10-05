@@ -94,7 +94,6 @@ header {
 }
 
 
-
 .theme-toggle {
   position: fixed;
   top: 20px;
@@ -188,6 +187,14 @@ h1 {
   opacity: 1;
 }
 
+
+
+
+
+
+
+
+/* Project Section Styling */
 .projects-container {
   max-width: 1200px;
   margin: 0 auto;
