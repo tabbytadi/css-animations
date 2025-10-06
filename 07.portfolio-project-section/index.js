@@ -132,4 +132,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Initialize with all projects in correct order
   reorderProjects('all');
+
+
+
+
+
+
+
 });

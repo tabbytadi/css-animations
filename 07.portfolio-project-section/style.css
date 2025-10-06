@@ -136,6 +136,11 @@ h1 {
   margin: 0 auto;
 }
 
+
+
+
+
+
 .filter-buttons {
   display: flex;
   justify-content: center;
@@ -386,6 +391,14 @@ h1 {
 .project:nth-child(10) {
   animation-delay: 1.0s;
 }
+
+
+
+
+
+
+
+
 
 
 @media (max-width: 900px) {
