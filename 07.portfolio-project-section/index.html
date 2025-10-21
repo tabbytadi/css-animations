@@ -7,226 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <title>Project Portfolio | Interactive Showcase</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    body.dark-theme {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-
-    header {
-      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-      color: white;
-      padding: 2rem;
-      text-align: center;
-      position: relative;
-    }
-
-    .dark-theme header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-
-    .subtitle {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-      opacity: 0.9;
-    }
-
-    .theme-toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .theme-toggle:hover {
-      background: rgba(255, 255, 255, 0.3);
-    }
-
-    .project-section {
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .filter-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-      justify-content: center;
-    }
-
-    .filter-btn {
-      padding: 0.5rem 1rem;
-      border: none;
-      background-color: #e9ecef;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .dark-theme .filter-btn {
-      background-color: #2d3748;
-      color: #e0e0e0;
-    }
-
-    .filter-btn.active,
-    .filter-btn:hover {
-      background-color: #6a11cb;
-      color: white;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-
-    .projects-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-
-    .project {
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .dark-theme .project {
-      background: #1e1e1e;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    }
-
-    .project:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .image-container {
-      height: 200px;
-      overflow: hidden;
-    }
-
-    .project-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-
-    .project:hover .project-image {
-      transform: scale(1.05);
-    }
-
-    .project-content {
-      padding: 1.5rem;
-    }
-
-    .project-title {
-      margin-top: 0;
-      font-size: 1.5rem;
-    }
-
-    .project-tech {
-      color: #6a11cb;
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
-
-    .dark-theme .project-tech {
-      color: #9d4edd;
-    }
-
-    .project-desc {
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .btn-hover {
-      transition: all 0.3s;
-    }
-
-    .btn-hover:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .color-purple {
-      border-color: #6a11cb;
-      color: #6a11cb;
-    }
-
-    .color-purple:hover {
-      background-color: #6a11cb;
-      color: white;
-    }
-
-    .show-more-container {
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .show-more-btn {
-      background-color: #6a11cb;
-      color: white;
-      border: none;
-      padding: 0.75rem 2rem;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .show-more-btn:hover {
-      background-color: #5a0db8;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(106, 17, 203, 0.3);
-    }
-
-    .show-more-btn .icon {
-      transition: transform 0.3s;
-    }
-
-    .show-more-btn.expanded .icon {
-      transform: rotate(180deg);
-    }
-
-    .project.hidden {
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -235,6 +16,9 @@
     <p class="subtitle">Interactive showcase of my creative projects with immersive hover effects</p>
     <button class="theme-toggle" id="theme-toggle">Toggle Theme</button>
   </header>
+
+
+
 
   <!-- PROJECT SECTION -->
   <section class="project-section">
@@ -268,7 +52,7 @@
             their history and doctors can manage records of their consultations.</p>
           <div class="btn-group">
             <a href="https://github.com/tabbytadi/medical-records"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -289,7 +73,7 @@
             productivity. Built in a team of five using agile methodology, where I contributed as Lead Developer. </p>
           <div class="btn-group">
             <a href="https://learn-n-earn.vercel.app" class="btn btn-sm btn-outline-light btn-hover color-purple"
-              style="padding-top: 8px" target="_blank">View
+              style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -307,7 +91,7 @@
             It demonstrates key Angular concepts including Components, Services and Routing.</p>
           <div class="btn-group">
             <a href="https://calculator-angular-roan.vercel.app"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -320,12 +104,12 @@
         <div class="project-content">
           <h2 class="project-title">YouTube Clone</h2>
           <p class="project-tech">HTML <span>|</span> CSS <span>|</span> Responsive Layouts</p>
-          <p class="project-desc">My first web development project, where I recreated YouTube's interface. Through
+          <p class="project-desc">My first web development project, where I recreated YouTube&#39;s interface. Through
             this project, I learned the basics of HTML structure, CSS styling, grids, and layouts, while also practicing
             how to organize a full webpage and use video embedding features.</p>
           <div class="btn-group">
             <a href="https://tabbytadi.github.io/YouTube-clone/youtube.html"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -348,7 +132,7 @@
           </p>
           <div class="btn-group">
             <a href="https://github.com/tabbytadi/Electronic-House-Administrator"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -370,7 +154,7 @@
             data serialization, and file I/O for editions. Includes unit tests for reliability.</p>
           <div class="btn-group">
             <a href="https://github.com/tabbytadi/Printing-House-Project"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -389,7 +173,7 @@
             real-time. Implements DFS and BFS algorithms to find paths from start to finish.</p>
           <div class="btn-group">
             <a href="https://github.com/tabbytadi/PythonMaze"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -401,14 +185,14 @@
         </div>
         <div class="project-content">
           <h2 class="project-title">Tic Tac Toe</h2>
-          <p class="project-tech">C++ <span>|</span> Console <span>|</span> Game Logic </p>
-          <p class="project-desc">A 2 players console-based Tic Tac Toe game implemented in C++. The game
+          <p class="project-tech">C&#43;&#43; <span>|</span> Console <span>|</span> Game Logic </p>
+          <p class="project-desc">A 2 players console-based Tic Tac Toe game implemented in C&#43;&#43;. The game
             announces a winner or a draw and demonstrates basic array manipulation, loops, and conditional logic in
-            C++.
+            C&#43;&#43;.
           </p>
           <div class="btn-group">
-            <a href="https://github.com/tabbytadi/TicTacToe/blob/main/tic_tac_toe.cpp"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+            <a href=https://github.com/tabbytadi/TicTacToe/blob/main/tic_tac_toe.cpp
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -428,7 +212,7 @@
             GUI layout management, file-based word loading and state management.</p>
           <div class="btn-group">
             <a href="https://github.com/tabbytadi/Hangman-Python/tree/main"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -447,7 +231,7 @@
             transaction processing.</p>
           <div class="btn-group">
             <a href="https://github.com/tabbytadi/Threaded-Sales-System-Java"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -466,7 +250,7 @@
           </p>
           <div class="btn-group">
             <a href="https://www.behance.net/gallery/234875053/Luxury-hotel-brochure"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -483,7 +267,7 @@
             and use of colors, highlighting brand identity.</p>
           <div class="btn-group">
             <a href="https://www.behance.net/gallery/234901223/Velour-Fine-Dining"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
@@ -501,138 +285,14 @@
             glassmorphism and balanced color schemes.</p>
           <div class="btn-group">
             <a href="https://www.behance.net/gallery/234907019/Login-HTML-CSS"
-              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target="_blank">View
+              class="btn btn-sm btn-outline-light btn-hover color-purple" style="padding-top: 8px" target=”_blank”>View
               Project</a>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Show More/Less Button Container -->
-    <div class="show-more-container" id="show-more-container">
-      <button class="show-more-btn" id="show-more-btn">
-        Show More
-        <svg class="icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-      </button>
-    </div>
   </section>
-
-  <script>
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-theme');
-    });
-
-    // Filter functionality
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projects = document.querySelectorAll('.project');
-    const currentSection = document.getElementById('current-section');
-    const showMoreContainer = document.getElementById('show-more-container');
-    const showMoreBtn = document.getElementById('show-more-btn');
-
-    // Configuration
-    const INITIAL_PROJECTS_COUNT = 6;
-    let isExpanded = false;
-    let currentFilter = 'all';
-
-    // Initialize projects
-    function initializeProjects() {
-      // Reset all projects to visible
-      projects.forEach(project => {
-        project.style.display = 'block';
-      });
-
-      // Then apply the filter
-      filterProjects('all');
-    }
-
-    // Filter projects based on section
-    function filterProjects(section) {
-      currentFilter = section;
-      currentSection.textContent = section === 'all' ? 'All Projects' :
-        section.charAt(0).toUpperCase() + section.slice(1) + ' Projects';
-
-      // Reset to collapsed state when changing filters
-      isExpanded = false;
-      updateShowMoreButton();
-
-      // Show all projects first
-      projects.forEach(project => {
-        project.classList.remove('hidden');
-      });
-
-      // Filter projects based on section
-      projects.forEach(project => {
-        const projectSections = project.getAttribute('data-section').split(' ');
-
-        if (section === 'all' || projectSections.includes(section)) {
-          project.style.display = 'block';
-        } else {
-          project.style.display = 'none';
-        }
-      });
-
-      // For "All Projects" section, apply the show more logic
-      if (section === 'all') {
-        applyProjectVisibility();
-        showMoreContainer.style.display = 'block';
-      } else {
-        // For other sections, show all projects and hide the button
-        showMoreContainer.style.display = 'none';
-      }
-    }
-
-    // Apply project visibility based on show more state
-    function applyProjectVisibility() {
-      const visibleProjects = Array.from(projects).filter(project =>
-        project.style.display !== 'none'
-      );
-
-      visibleProjects.forEach((project, index) => {
-        if (!isExpanded && index >= INITIAL_PROJECTS_COUNT) {
-          project.classList.add('hidden');
-        } else {
-          project.classList.remove('hidden');
-        }
-      });
-    }
-
-    // Update show more button text and state
-    function updateShowMoreButton() {
-      if (isExpanded) {
-        showMoreBtn.innerHTML = 'Show Less <svg class="icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10L8 6L12 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        showMoreBtn.classList.add('expanded');
-      } else {
-        showMoreBtn.innerHTML = 'Show More <svg class="icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        showMoreBtn.classList.remove('expanded');
-      }
-    }
-
-    // Toggle show more/less
-    function toggleShowMore() {
-      isExpanded = !isExpanded;
-      applyProjectVisibility();
-      updateShowMoreButton();
-    }
-
-    // Event listeners
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        filterProjects(button.getAttribute('data-section'));
-      });
-    });
-
-    showMoreBtn.addEventListener('click', toggleShowMore);
-
-    // Initialize
-    initializeProjects();
-  </script>
+  <script src="index.js"></script>
 </body>
 
 </html>
