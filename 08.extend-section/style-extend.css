@@ -1,9 +1,13 @@
-.box:nth-child(even) {
+.box[data-section="second"] {
   background: pink;
 }
 
-.box:nth-child(odd) {
-  background: rgb(245, 245, 177);
+.box[data-section="first"] {
+  background: #f5f5b1;
+}
+
+.box[data-section="first second"] {
+  background: linear-gradient(to right, #f5f5b1, pink);
 }
 
 .box {

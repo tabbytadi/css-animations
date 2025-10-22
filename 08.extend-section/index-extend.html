@@ -10,38 +10,47 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="box" id="box1">
-      <h3>Hello 👋</h3>
-      <p>This is a neat little container.</p>
+  <section class="project-section">
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-section="all">All Sections</button>
+      <button class="filter-btn" data-section="first">First Section</button>
+      <button class="filter-btn" data-section="second">Second Section</button>
     </div>
-    <div class="box" id="box1">
-      <h3>Hello 👋</h3>
-      <p>This is another neat little container.</p>
-    </div>
-    <div class="box" id="box1">
-      <h3>Hello 👋</h3>
-      <p>This is yet another neat little container.</p>
-    </div>
-    <div class="box" id="box1">
-      <h3>Hello 👋</h3>
-      <p>This is the final little container.</p>
-    </div>
-    <span class="dots">...</span>
-    <div class="extra">
-      <div class="box" id="box2">
-        <h3>Hello 👋</h3>
-        <p>This is a hidden neat little container.</p>
-      </div>
-      <div class="box" id="box1">
-        <h3>Hello 👋</h3>
-        <p>This is the final hidden little container.</p>
-      </div>
-    </div>
-    <input type="checkbox" id="btn">
-    <label for="btn"></label>
 
-  </div>
+
+    <div class="container">
+      <div class="box" data-section="first">
+        <h3>Hello 👋</h3>
+        <p>This is a neat little container.</p>
+      </div>
+      <div class="box" data-section="first">
+        <h3>Hello 👋</h3>
+        <p>This is another neat little container.</p>
+      </div>
+      <div class="box" data-section="second" data-section="second">
+        <h3>Hello 👋</h3>
+        <p>This is yet another neat little container.</p>
+      </div>
+      <div class="box" data-section="second">
+        <h3>Hello 👋</h3>
+        <p>This is the final little container.</p>
+      </div>
+      <span class="dots">...</span>
+      <div class="extra">
+        <div class="box" data-section="second">
+          <h3>Hello 👋</h3>
+          <p>This is a hidden neat little container.</p>
+        </div>
+        <div class="box" data-section="first second">
+          <h3>Hello 👋</h3>
+          <p>This is the FINAL hidden little container.</p>
+        </div>
+      </div>
+      <input type="checkbox" id="btn">
+      <label for="btn"></label>
+
+    </div>
+  </section>
 </body>
 
 </html>
