@@ -10,6 +10,7 @@
   background: linear-gradient(to right, #f5f5b1, pink);
 }
 
+/* ====== BOX APPEARANCE ====== */
 .box {
   width: 300px;
   padding: 20px;
@@ -19,8 +20,47 @@
   background-color: #f9f9f9;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Hidden state for filter animation */
+.box.hidden {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  display: none;
+}
+
+/* ====== FILTER BUTTONS ====== */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(to right, #f5f5b1, pink);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.filter-btn.active {
+  background: linear-gradient(to right, #ffc371, #ff5f6d);
+}
+
+/* ====== READ MORE / LESS ====== */
 .extra {
   display: none;
 }
@@ -38,22 +78,29 @@ input[type="checkbox"] {
 label {
   position: relative;
   padding: 1em;
-  background-color: #000000;
+  background-color: #000;
   color: white;
   cursor: pointer;
+  display: block;
+  text-align: center;
+  width: 150px;
+  margin: 0 auto;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+label:hover {
+  background-color: #333;
 }
 
 label::before {
   content: "Read More";
 }
 
-input[type="checkbox"]:checked~label:before {
+input[type="checkbox"]:checked~label::before {
   content: "Read Less";
 }
 
-.dots:has(~ input[type="checkbox"]:checked) {
-  display: none;
-}
 
 .extra:has(~ input[type="checkbox"]:checked) {
   display: inline;
