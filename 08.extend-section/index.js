@@ -1,64 +1,77 @@
-// Select elements
+// ====== ELEMENT SELECTION ======
 const filterButtons = document.querySelectorAll('.filter-btn');
 const boxes = document.querySelectorAll('.box');
 const extraContent = document.querySelector('.extra');
 const readMoreCheckbox = document.querySelector('#btn');
 const readMoreLabel = document.querySelector('label');
 
-// Store the read more toggle state
+// Remember the "Read More" state between section switches
 let isReadMoreChecked = false;
 
-// Helper function to update Read More visibility based on current mode
+// ====== FUNCTION: UPDATE READ MORE STATE ======
 function updateReadMoreState(section) {
   if (section === 'all') {
-    // Restore visibility of the toggle and its previous state
+    // Show toggle button again
     readMoreLabel.style.display = 'block';
     readMoreCheckbox.style.display = 'block';
-    readMoreCheckbox.checked = isReadMoreChecked; // restore last state
+
+    // Restore last checkbox state
+    readMoreCheckbox.checked = isReadMoreChecked;
 
     if (readMoreCheckbox.checked) {
-      extraContent.style.display = 'inline';
+      extraContent.style.display = 'block';
+      extraContent.classList.add('fade-in');
     } else {
       extraContent.style.display = 'none';
+      extraContent.classList.remove('fade-in');
     }
   } else {
-    // Hide the toggle in filtered views and always show extra content
+    // Hide toggle in filtered views, always show extra content
     readMoreLabel.style.display = 'none';
     readMoreCheckbox.style.display = 'none';
-    extraContent.style.display = 'inline';
+    extraContent.style.display = 'block';
+    extraContent.classList.add('fade-in');
   }
 }
 
-// Update boxes and read more behavior when buttons are clicked
+// ====== FUNCTION: FILTER BOXES ======
+function filterBoxes(section) {
+  boxes.forEach(box => {
+    const sections = box.dataset.section.split(' '); // supports multiple data-section values
+    if (section === 'all' || sections.includes(section)) {
+      box.classList.remove('hidden');
+    } else {
+      box.classList.add('hidden');
+    }
+  });
+}
+
+// ====== EVENT: FILTER BUTTON CLICK ======
 filterButtons.forEach(button => {
   button.addEventListener('click', () => {
-    // Remove 'active' from all buttons, activate current
+    // Update active button
     filterButtons.forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
 
     const section = button.dataset.section;
 
-    // Show/hide boxes based on selected section
-    boxes.forEach(box => {
-      const sections = box.dataset.section.split(' '); // handle multiple values like "first second"
-      if (section === 'all' || sections.includes(section)) {
-        box.classList.remove('hidden');
-      } else {
-        box.classList.add('hidden');
-      }
-    });
+    // Filter boxes
+    filterBoxes(section);
 
-    // Update Read More button behavior
+    // Update Read More state and animation
     updateReadMoreState(section);
   });
 });
 
-// Track checkbox state between section switches
+// ====== EVENT: READ MORE TOGGLE ======
 readMoreCheckbox.addEventListener('change', () => {
   isReadMoreChecked = readMoreCheckbox.checked;
+
   if (isReadMoreChecked) {
-    extraContent.style.display = 'inline';
+    extraContent.style.display = 'block';
+    extraContent.classList.add('fade-in');
   } else {
     extraContent.style.display = 'none';
+    extraContent.classList.remove('fade-in');
   }
 });

@@ -106,10 +106,30 @@ input[type="checkbox"]:checked~label::before {
   display: inline;
 }
 
+/* ====== READ MORE ANIMATION (Smooth + Safe) ====== */
 .extra {
   display: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 input[type="checkbox"]:checked~.extra {
-  display: inline;
+  display: block;
+  animation: fadeInSlide 0.4s ease forwards;
+}
+
+.fade-in {
+  animation: fadeInSlide 0.4s ease forwards;
+}
+
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
