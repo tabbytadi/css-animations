@@ -60,11 +60,6 @@
   background: linear-gradient(to right, #ffc371, #ff5f6d);
 }
 
-/* ====== READ MORE / LESS ====== */
-.extra {
-  display: none;
-}
-
 p {
   display: inline;
 }
@@ -106,7 +101,6 @@ input[type="checkbox"]:checked~label::before {
   display: inline;
 }
 
-/* ====== READ MORE ANIMATION (Smooth + Safe) ====== */
 .extra {
   display: none;
   opacity: 0;
